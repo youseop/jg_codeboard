@@ -20,11 +20,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
-<<<<<<< HEAD
-    
-=======
     modify_date = models.DateTimeField(null=True, blank=True)
->>>>>>> 1e8e20cc62041deba7669253006cdec147bce21f
 
     def __str__(self):
         return self.content

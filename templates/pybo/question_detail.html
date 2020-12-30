@@ -3,7 +3,6 @@
     <!-- -------------------------------------- [edit] ------------------------------------------ -->
     <h1>{{ question.subject }}</h1>
 
-<<<<<<< HEAD
 <div>
     {{question.content}}
     <td>{{ question.author.username }}</td> 
@@ -30,12 +29,10 @@
         {% if field.errors %}
         <strong>{{ field.label }}</strong>
         {{ field.errors }}
-=======
     <div>
         {{question.content}}
         {% if question.modify_date %}
             {{ question.modify_date }}
->>>>>>> 1e8e20cc62041deba7669253006cdec147bce21f
         {% endif %}
         {{ question.create_date }}
     </div>
@@ -66,13 +63,11 @@
             {% endfor %}
         </ul>
     </div>
-<<<<<<< HEAD
 {% endif %}
 <textarea {% if not user.is_authenticated %}disabled{% endif %} name="content" id="content" rows="15"></textarea> 
 <input type="submit" value="답변등록">
 </form>
 <!---------------------------------------- [edit] ------------------------------------------ -->
-=======
 
     <form action="{% url 'pybo:answer_create' question.id %}" method="post">
         {% csrf_token %}
@@ -102,5 +97,4 @@
             });
         });
     </script>
->>>>>>> 1e8e20cc62041deba7669253006cdec147bce21f
 {% endblock %}
