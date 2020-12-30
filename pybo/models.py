@@ -6,6 +6,7 @@ class Question(models.Model):
     subject = models.CharField(max_length=200)
     content = models.TextField()
     create_date = models.DateTimeField()
+    
     #Answer와 연결되어있으므로 answer(연결모델)_set 으로 연결된 답변 찾을 수 있음 
 # -------------------------------------- [edit] ------------------------------------------
     def __str__(self):
@@ -17,4 +18,7 @@ class Answer(models.Model):
     # on_delete~~~는 답변에 연결된 질문이 삭제되면 답변도 함꼐 삭제하라는 의미
     content = models.TextField()
     create_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.content
 # -------------------------------------- [edit] ------------------------------------------
