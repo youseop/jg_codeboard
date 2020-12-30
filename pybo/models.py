@@ -6,7 +6,8 @@ class Question(models.Model):
     subject = models.CharField(max_length=200)
     content = models.TextField()
     create_date = models.DateTimeField()
-    
+    modify_date = models.DateTimeField(null=True, blank=True)
+
     #Answer와 연결되어있으므로 answer(연결모델)_set 으로 연결된 답변 찾을 수 있음 
 # -------------------------------------- [edit] ------------------------------------------
     def __str__(self):
@@ -14,10 +15,9 @@ class Question(models.Model):
 # -------------------------------------- [edit] ------------------------------------------
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    # 어떤 model이 다른 model을 속성으로 가지면 foreignkey 사용
-    # on_delete~~~는 답변에 연결된 질문이 삭제되면 답변도 함꼐 삭제하라는 의미
     content = models.TextField()
     create_date = models.DateTimeField()
+    modify_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.content

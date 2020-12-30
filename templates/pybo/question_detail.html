@@ -1,36 +1,69 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- -------------------------------------- [edit] ------------------------------------------ -->
-<h1>{{ question.subject }}</h1>
+    <!-- -------------------------------------- [edit] ------------------------------------------ -->
+    <h1>{{ question.subject }}</h1>
 
-<div>
-    {{question.content}}
-</div>
-<!---------------------------------------- [edit] ------------------------------------------ -->
-<h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
-<div>
-    <ul>
-    {% for answer in question.answer_set.all %}
-        <li>{{ answer.content }}</li>
-    {% endfor %}
-    </ul>
-</div>
-
-<!---------------------------------------- [edit] ------------------------------------------ -->
-<form action="{% url 'pybo:answer_create' question.id %}" method="post">
-{% csrf_token %}
-{% if form.errors %}
-    <div class="alert alert-danger" role="alert">
-    {% for field in form %}
-        {% if field.errors %}
-        <strong>{{ field.label }}</strong>
-        {{ field.errors }}
+    <div>
+        {{question.content}}
+        {% if question.modify_date %}
+            {{ question.modify_date }}
         {% endif %}
-    {% endfor %}
+        {{ question.create_date }}
     </div>
-{% endif %}
-<textarea name="content" id="content" rows="15"></textarea> 
-<input type="submit" value="답변등록">
-</form>
-<!---------------------------------------- [edit] ------------------------------------------ -->
+
+    {#    {% if request.user == question.author %}#}
+    <div class="my-3">
+        <a href="{% url 'pybo:question_modify' question.id  %}"
+           class="btn btn-sm btn-outline-secondary">수정</a>
+        <a href="#" class="delete"
+           data-uri="{% url 'pybo:question_delete' question.id  %}">삭제</a>
+    </div>
+    {#    {% endif %}#}
+
+
+    <h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
+    <div>
+        <ul>
+            {% for answer in question.answer_set.all %}
+                <li>{{ answer.content }} {% if answer.modify_date %} {{ answer.modify_date }} {% endif %} {{ answer.create_date }}</li>
+                {#                {% if request.user == answer.author %}#}
+                <div>
+                    <a href="{% url 'pybo:answer_modify' answer.id %}"
+                       class="btn">수정</a>
+                    <a href="#" class="delete"
+                       data-uri="{% url 'pybo:answer_delete' answer.id %}">삭제</a>
+                </div>
+                {#                {% endif %}#}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <form action="{% url 'pybo:answer_create' question.id %}" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for field in form %}
+                    {% if field.errors %}
+                        <strong>{{ field.label }}</strong>
+                        {{ field.errors }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <textarea name="content" id="content" rows="15"></textarea>
+        <input type="submit" value="답변등록">
+    </form>
+
+{% endblock %}
+
+{% block script %}
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $(".delete").on('click', function() {
+                if(confirm("정말로 삭제하시겠습니까?")) {
+                    location.href = $(this).data('uri');
+                }
+            });
+        });
+    </script>
 {% endblock %}
