@@ -29,6 +29,8 @@
         {% if field.errors %}
         <strong>{{ field.label }}</strong>
         {{ field.errors }}
+        {% endif %}
+    {% endfor %}
     <div>
         {{question.content}}
         {% if question.modify_date %}

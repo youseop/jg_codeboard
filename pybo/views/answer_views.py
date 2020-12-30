@@ -41,7 +41,6 @@ def answer_modify(request, answer_id):
     else:
         form = AnswerForm(instance=answer)
     context = {'answer': answer, 'form': form}
-    print("Yes")
     return render(request, 'pybo/answer_form.html', context)
 
 # @login_required(login_url='common:login')
