@@ -6,6 +6,8 @@
     <ul>
     {% for question in question_list %}
         <li><a href="{% url 'pybo:detail' question.id %}">{{ question.subject}}</a></li>
+        <td>{{ question.author.username }}</td> 
+        <td>{{ question.create_date }}</td>
     {% endfor %}
     </ul>
 {% else %}

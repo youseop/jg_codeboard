@@ -24,4 +24,5 @@ urlpatterns = [
     path('', base_views.index, name='index'),
 
     path('common/', include('common.urls')),
+
 ]

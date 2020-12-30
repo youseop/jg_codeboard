@@ -33,13 +33,20 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 # -------------------------------------- [edit] ------------------------------------------
     'pybo.apps.PyboConfig',
-    'common.apps.CommonConfig'
+    'common.apps.CommonConfig',
+# -------------------------------------- [edit] ------------------------------------------
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -128,3 +135,13 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 # ---------------------------------------- [edit] ------------------------------------------ --
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
