@@ -14,3 +14,4 @@ class AnswerAdmin(admin.ModelAdmin):
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
 # -------------------------------------- [edit] ------------------------------------------
+# -------------------------------------- [edit] ------------------------------------------
