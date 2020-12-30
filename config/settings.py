@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 # -------------------------------------- [edit] ------------------------------------------
-    'pybo.apps.PyboConfig'
+    'pybo.apps.PyboConfig',
     'common.apps.CommonConfig'
 ]
 
