@@ -2,8 +2,4 @@
 db.sqlite3
 *.pyc
 __pycache__
-<<<<<<< HEAD
 .vscode
-=======
-venv
->>>>>>> aeee3d5e10e795cb6f2f4eaca984f4995e26b294
