@@ -22,4 +22,6 @@ urlpatterns = [
     path('pybo/', include('pybo.urls')),
 
     path('', base_views.index, name='index'),
+
+    path('common/', include('common.urls')),
 ]

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 # -------------------------------------- [edit] ------------------------------------------
     'pybo.apps.PyboConfig'
+    'common.apps.CommonConfig'
 ]
 
 MIDDLEWARE = [
