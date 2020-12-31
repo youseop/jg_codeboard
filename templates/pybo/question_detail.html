@@ -8,46 +8,15 @@
     <td>{{ question.author.username }}</td> 
     <td>{{ question.create_date }}</td>
 </div>
-<!---------------------------------------- [edit] ------------------------------------------ -->
-<h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
-<div>
-    <ul>
-    {% for answer in question.answer_set.all %}
-        <li>{{ answer.content }}</li>
-        <td>{{ answer.author.username }}</td> 
-        <td>{{ answer.create_date }}</td>
-    {% endfor %}
-    </ul>
-</div>
 
-<!---------------------------------------- [edit] ------------------------------------------ -->
-<form action="{% url 'pybo:answer_create' question.id %}" method="post">
-{% csrf_token %}
-{% if form.errors %}
-    <div class="alert alert-danger" role="alert">
-    {% for field in form %}
-        {% if field.errors %}
-        <strong>{{ field.label }}</strong>
-        {{ field.errors }}
-        {% endif %}
-    {% endfor %}
-    <div>
-        {{question.content}}
-        {% if question.modify_date %}
-            {{ question.modify_date }}
-        {% endif %}
-        {{ question.create_date }}
-    </div>
-
-    {% if request.user == question.author %}
+{% if request.user == question.author %}
     <div class="my-3">
         <a href="{% url 'pybo:question_modify' question.id  %}"
            class="btn btn-sm btn-outline-secondary">수정</a>
         <a href="#" class="delete"
            data-uri="{% url 'pybo:question_delete' question.id  %}">삭제</a>
     </div>
-    {% endif %}
-
+{% endif %}
 
     <h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
     <div>
@@ -65,10 +34,7 @@
             {% endfor %}
         </ul>
     </div>
-{% endif %}
-<textarea {% if not user.is_authenticated %}disabled{% endif %} name="content" id="content" rows="15"></textarea> 
-<input type="submit" value="답변등록">
-</form>
+
 <!---------------------------------------- [edit] ------------------------------------------ -->
 
     <form action="{% url 'pybo:answer_create' question.id %}" method="post">
@@ -83,7 +49,7 @@
                 {% endfor %}
             </div>
         {% endif %}
-        <textarea name="content" id="content" rows="15"></textarea>
+        <textarea {% if not user.is_authenticated %}disabled{% endif %} name="content" id="content" rows="15"></textarea> 
         <input type="submit" value="답변등록">
     </form>
 
