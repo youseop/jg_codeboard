@@ -29,6 +29,8 @@
         {% if field.errors %}
         <strong>{{ field.label }}</strong>
         {{ field.errors }}
+        {% endif %}
+    {% endfor %}
     <div>
         {{question.content}}
         {% if question.modify_date %}
@@ -37,14 +39,14 @@
         {{ question.create_date }}
     </div>
 
-    {#    {% if request.user == question.author %}#}
+    {% if request.user == question.author %}
     <div class="my-3">
         <a href="{% url 'pybo:question_modify' question.id  %}"
            class="btn btn-sm btn-outline-secondary">수정</a>
         <a href="#" class="delete"
            data-uri="{% url 'pybo:question_delete' question.id  %}">삭제</a>
     </div>
-    {#    {% endif %}#}
+    {% endif %}
 
 
     <h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
@@ -52,14 +54,14 @@
         <ul>
             {% for answer in question.answer_set.all %}
                 <li>{{ answer.content }} {% if answer.modify_date %} {{ answer.modify_date }} {% endif %} {{ answer.create_date }}</li>
-                {#                {% if request.user == answer.author %}#}
+                {% if request.user == answer.author %}
                 <div>
                     <a href="{% url 'pybo:answer_modify' answer.id %}"
                        class="btn">수정</a>
                     <a href="#" class="delete"
                        data-uri="{% url 'pybo:answer_delete' answer.id %}">삭제</a>
                 </div>
-                {#                {% endif %}#}
+                {% endif %}
             {% endfor %}
         </ul>
     </div>
