@@ -4,4 +4,8 @@ db.sqlite3
 __pycache__
 .vscode
 venv
+<<<<<<< HEAD
 pybo/migrations
+=======
+migrations
+>>>>>>> 59fc34caebd6c9ed1176190b3bd576ca71a4b347
