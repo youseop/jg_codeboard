@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load pybo_filter %}
+
 {% block content %}
     <!-- -------------------------------------- [edit] ------------------------------------------ -->
+<div> 
     <h1>{{ question.subject }}</h1>
-
-<div>
-    {{question.content}}
+    <div>{{ question.content|mark }}</div>
     <td>{{ question.author.username }}</td> 
     <td>{{ question.create_date }}</td>
 </div>
@@ -49,7 +50,14 @@
     <div>
         <ul>
             {% for answer in question.answer_set.all %}
-                <li>{{ answer.content }} {% if answer.modify_date %} {{ answer.modify_date }} {% endif %} {{ answer.create_date }}</li>
+            <div> 
+                <div>{{ answer.content|mark }}</div>
+                {% if answer.modify_date %}
+                <td>{{ answer.modify_date }}</td>
+                {% endif %}
+                <td>{{ answer.create_date }}</td>
+
+            </div>
                 {% if request.user == answer.author %}
                 <div>
                     <a href="{% url 'pybo:answer_modify' answer.id %}"
@@ -84,7 +92,6 @@
                             class="small"><small>댓글 추가 ..</small></a>
                     </div>
     <!-- 답글 댓글 끝-->
-
             {% endfor %}
         </ul>
     </div>
