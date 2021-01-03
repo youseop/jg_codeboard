@@ -32,3 +32,4 @@
 - postgreSQL 데이터베이스 적용 
 
 
+feature_socialLogin
